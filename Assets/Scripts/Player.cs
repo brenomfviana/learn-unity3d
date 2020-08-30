@@ -5,23 +5,56 @@ using UnityEngine;
 public class Player : MonoBehaviour {
   //
   public float moveSpeed = 5f;
+  public SpriteRenderer sptrndr;
+  public Rigidbody2D rbody;
+  public Animator animator;
 
-  //
-  bool jump = false;
+  // Player horizontal movement
+  float hmove = 0;
+  int jumps = 0;
 
   void Update() {
-    //
-    Jump();
-    // Get player's horizontal move
-    Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-    transform.position += movement * Time.deltaTime * moveSpeed;
+    // Get inputs
+    hmove = Input.GetAxis("Horizontal") * moveSpeed;
+    // Check if the player pressed the jump button
+    if (Input.GetButtonDown("Jump") && (jumps < 2)) {
+      // Calculate the jump force
+      Vector2 jumpForce = new Vector2(0f, 5f);
+      if (jumps == 1) {
+        jumpForce = new Vector2(0f, 2.5f);
+      }
+      // Perform the jump
+      rbody.AddForce(jumpForce, ForceMode2D.Impulse);
+      // Jump counter
+      jumps += 1;
+      // Start animation
+      animator.SetBool("IsJumping", true);
+    }
+    // # Animations
+    // Player direction
+    if (hmove < 0) {
+      sptrndr.flipX = true;
+    } else if (hmove > 0) {
+      sptrndr.flipX = false;
+    }
+    // Running
+    animator.SetFloat("Speed", Mathf.Abs(hmove));
+    // Falling
+    if (rbody.velocity.y < 0) {
+      animator.SetBool("IsJumping", false);
+      animator.SetBool("IsFalling", true);
+    }
+    // Jumping
+    if (rbody.velocity.y == 0) {
+      animator.SetBool("IsJumping", false);
+      animator.SetBool("IsFalling", false);
+      jumps = 0;
+    }
   }
 
-  void Jump() {
-    if (Input.GetButtonDown("Jump")) {
-      GameObject sprite = gameObject.transform.GetChild(0).gameObject;
-      Rigidbody2D body = sprite.GetComponent<Rigidbody2D>();
-      body.AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
-    }
+  void FixedUpdate() {
+    // Get player's horizontal move
+    Vector3 movement = new Vector3(hmove, 0f, 0f);
+    transform.position += movement * Time.deltaTime;
   }
 }
