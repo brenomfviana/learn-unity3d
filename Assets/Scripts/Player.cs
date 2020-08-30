@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-  //
+  // Player public attributes
   public float moveSpeed = 5f;
   public SpriteRenderer sptrndr;
   public Rigidbody2D rbody;
   public Animator animator;
-
-  // Player horizontal movement
+  // Player private attributes
   float hmove = 0;
   int jumps = 0;
 
@@ -56,5 +55,16 @@ public class Player : MonoBehaviour {
     // Get player's horizontal move
     Vector3 movement = new Vector3(hmove, 0f, 0f);
     transform.position += movement * Time.deltaTime;
+  }
+
+  void OnTriggerEnter2D(Collider2D other) {
+    // Collect coins
+    if (other.gameObject.CompareTag("Coin")) {
+      Destroy(other.gameObject);
+    }
+    // The player fall in the abyss
+    if (other.gameObject.CompareTag("Abyss")) {
+      // TODO: die
+    }
   }
 }
