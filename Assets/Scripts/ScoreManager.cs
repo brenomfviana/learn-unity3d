@@ -1,22 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
 
+  // Singleton
   public static ScoreManager instance;
+  // Score text
   public Text text;
+  // Score
   int score = 0;
 
-  void Start() {
+  void Awake() {
+    // Singleton
     if (instance == null) {
       instance = this;
     }
   }
 
   public void ChangeScore(int coinValue) {
-    score += coinValue;
-    text.text = "x" + score.ToString();
+    if (instance != null) {
+      score += coinValue;
+      text.text = "x" + score.ToString();
+    }
   }
 }

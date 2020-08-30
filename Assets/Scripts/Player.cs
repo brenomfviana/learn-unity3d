@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -61,10 +59,6 @@ public class Player : MonoBehaviour {
     // Collect coins
     if (other.gameObject.CompareTag("Coin")) {
       Destroy(other.gameObject);
-    }
-    // The player fall in the abyss
-    if (other.gameObject.CompareTag("Abyss")) {
-      // TODO: die
     }
   }
 }
