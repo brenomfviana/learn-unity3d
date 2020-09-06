@@ -13,6 +13,11 @@ public class ScoreManager : MonoBehaviour {
   void Awake() {
     // Singleton
     if (instance == null) {
+      GameData data = SaveSystem.LoadGame();
+      if (data != null) {
+        score = data.score;
+        text.text = "x" + score.ToString();
+      }
       instance = this;
     }
   }
@@ -22,5 +27,12 @@ public class ScoreManager : MonoBehaviour {
       score += coinValue;
       text.text = "x" + score.ToString();
     }
+  }
+
+  public int GetScore() {
+    if (instance != null) {
+      return score;
+    }
+    return -1;
   }
 }
