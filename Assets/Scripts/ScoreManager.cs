@@ -23,16 +23,11 @@ public class ScoreManager : MonoBehaviour {
   }
 
   public void ChangeScore(int coinValue) {
-    if (instance != null) {
-      score += coinValue;
-      text.text = "x" + score.ToString();
-    }
+    score += coinValue;
+    text.text = "x" + score.ToString();
   }
 
   public int GetScore() {
-    if (instance != null) {
-      return score;
-    }
-    return -1;
+    return score;
   }
 }

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
     if (Input.GetButtonDown("Jump") && (jumps < 2)) {
       // Calculate the jump force
       Vector2 jumpForce = new Vector2(0f, 5f);
-      if (jumps == 1) {
+      if (jumps == 1 && rbody.velocity.y == 0) {
         jumpForce = new Vector2(0f, 2.5f);
       }
       // Perform the jump
