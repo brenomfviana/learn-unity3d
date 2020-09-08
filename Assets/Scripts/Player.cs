@@ -15,9 +15,11 @@ public class Player : MonoBehaviour {
     hmove = Input.GetAxis("Horizontal") * moveSpeed;
     // Check if the player pressed the jump button
     if (Input.GetButtonDown("Jump") && (jumps < 2)) {
+      // Reset jump
+      rbody.velocity = new Vector3(0f,0f,0f); 
       // Calculate the jump force
       Vector2 jumpForce = new Vector2(0f, 5f);
-      if (jumps == 1 && rbody.velocity.y == 0) {
+      if (jumps == 1 && animator.GetBool("IsFalling")) {
         jumpForce = new Vector2(0f, 2.5f);
       }
       // Perform the jump
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour {
       animator.SetBool("IsJumping", false);
       animator.SetBool("IsFalling", true);
     }
-    // Jumping
+    // In ground
     if (rbody.velocity.y == 0) {
       animator.SetBool("IsJumping", false);
       animator.SetBool("IsFalling", false);
