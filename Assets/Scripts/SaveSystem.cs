@@ -3,7 +3,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public static class SaveSystem {
-
   // Save file path
   static string path = Application.persistentDataPath + "/game";
 

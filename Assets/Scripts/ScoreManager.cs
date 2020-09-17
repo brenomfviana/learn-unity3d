@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
-
   // Singleton
   public static ScoreManager instance;
   // Score text

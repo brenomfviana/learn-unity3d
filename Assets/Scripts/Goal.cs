@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour {
-
   public ScoreManager scoreManager;
 
   private void OnTriggerEnter2D(Collider2D other) {
