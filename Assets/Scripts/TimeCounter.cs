@@ -2,24 +2,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class TimeCounter : MonoBehaviour {
+public class TimeCounter : MonoBehaviour
+{
+    // Define the wait time (in seconds)
+    public float timeRemaining = 5;
+    // Get the text object where the time will be shown
+    public GameObject textCounter;
 
-  public float timeRemaining = 5;
-  public GameObject textCounter;
-  private TextMeshProUGUI text;
+    // Text object where the time will be shown
+    private TextMeshProUGUI text;
 
-  void Awake() {
-    text = textCounter.GetComponent<TextMeshProUGUI>();
-  }
-
-  void Update() {
-    if (timeRemaining > 0) {
-      timeRemaining -= Time.deltaTime;
+    // Awake is called when the script instance is being loaded
+    void Awake()
+    {
+        text = textCounter.GetComponent<TextMeshProUGUI>();
     }
-    text.text = ((int) timeRemaining).ToString();
-    if (timeRemaining <= 0) {
-      SaveSystem.DeleteSave();
-      SceneManager.LoadScene(0);
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Decrease time
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+        }
+        // Convert time into integer and fix the value
+        text.text = ((int)timeRemaining + 1).ToString();
+        // Delete the saved game and load the main menu
+        if (timeRemaining <= 0)
+        {
+            SaveSystem.DeleteSave();
+            SceneManager.LoadScene(0);
+        }
     }
-  }
 }

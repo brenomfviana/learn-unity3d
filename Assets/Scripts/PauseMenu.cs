@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour {
-  public void BackToMainMenu() {
-    SceneManager.LoadScene(0);
-  }
+public class PauseMenu : MonoBehaviour
+{
+    // Back to main menu
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

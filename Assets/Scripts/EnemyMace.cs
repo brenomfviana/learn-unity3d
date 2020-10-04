@@ -2,27 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMace : MonoBehaviour {
+public class EnemyMace : MonoBehaviour
+{
+    // Define the range of positions where the enemy move
+    public float startvpos, endvpos;
+    // Define if the enemy start falling or rising
+    public bool falling;
+    // Define the enemy velocity
+    public float velocity;
 
-  private static float ERROR = 0.01f;
+    // Movement error
+    private static float ERROR = 0.01f;
 
-  public float startvpos, endvpos;
-  public bool falling;
-  public float velocity;
-
-  void FixedUpdate() {
-    Vector3 pos = gameObject.transform.position;
-    if (!falling && pos.y < endvpos) {
-      pos.y += velocity;
-    } else {
-      pos.y -= velocity;
+    // FixedUpdate is called every fixed frame-rate frame
+    void FixedUpdate()
+    {
+        // Get enemy position
+        Vector3 pos = gameObject.transform.position;
+        // Get the movement direction
+        if (!falling && pos.y < endvpos)
+        {
+            pos.y += velocity;
+        }
+        else
+        {
+            pos.y -= velocity;
+        }
+        // Check if the enemy reached the lower bound
+        if (pos.y < startvpos + ERROR)
+        {
+            falling = false;
+        }
+        // Check if the enemy reached the upper bound
+        else if (pos.y > endvpos - ERROR)
+        {
+            falling = true;
+        }
+        // Update enemy position
+        gameObject.transform.position = pos;
     }
-    //
-    if (pos.y < startvpos + ERROR) {
-      falling = false;
-    } else if (pos.y > endvpos - ERROR) {
-      falling = true;
-    }
-    gameObject.transform.position = pos;
-  }
 }

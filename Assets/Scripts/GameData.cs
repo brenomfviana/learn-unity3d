@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GameData {
-  public int score;
-  public int level;
+public class GameData
+{
+    // Score
+    public int score;
+    // The last completed level
+    public int level;
 
-  public GameData(ScoreManager scoreManager, int levelID) {
-    score = scoreManager.GetScore();
-    level = levelID;
-  }
+    // Game data constructor.
+    public GameData(ScoreManager scoreManager, int levelID)
+    {
+        score = scoreManager.Score;
+        level = levelID;
+    }
 }
