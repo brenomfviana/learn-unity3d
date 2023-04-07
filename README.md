@@ -2,7 +2,7 @@
 
 ## Description
 
-This repository contains a simple platform game I made during my learning of Unity3D.
+This repository contains a simple platform game I made during when I was learning Unity3D.
 
 
 ## Preview
